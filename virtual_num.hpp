@@ -11,6 +11,20 @@ a.changeFreq(10,'k')  // change frequency to 10k
 a.conjugate () // x+yi to x-yi
 cout << a
 +, +=, -, -=, *, *=, \, \=, ||
+
+example:
+int list[] = {12,18,28,35,100};
+virnum a ('c',0.022,'u',200,'k');
+virnum b ('l',2.2,'m');
+virnum c ('r',1,'k');
+virnum d ('r',5.1,'1');
+for (i = 0; i < sizeof(list)/sizeof(int); i++)
+{
+    a.changeFreq(list[i]);
+    b.changeFreq(list[i]);
+    virnum all = (a||c)+b+d;
+    std::cout << all;
+}
  */
 
 class virnum
