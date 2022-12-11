@@ -67,7 +67,6 @@ virnum :: virnum(long double real , long double virtuaI)
 virnum :: virnum(char kind , long double num , char mult_1 , long double freq=1 , char mult_2='k')
 {
     long double w;  //w=2*pi*f
-    int check = 0;
     if ('k' == mult_1) num *= 1000;
     else if ('1' == mult_1) num *= 1;
     else if('m' == mult_1) num *= 1e-3;
@@ -86,21 +85,18 @@ virnum :: virnum(char kind , long double num , char mult_1 , long double freq=1 
     {
         real = num;
         virtuaI = 0;
-        check = 1;
     }
     else if ('c' == kind || 'C' == kind)
     {
         real = 0;
         virtuaI = -1/(w*num);
-        check = 1;
     }
     else if ('l' == kind || 'L' == kind)
     {
         real = 0;
         virtuaI = w*num;
-        check = 1;
     }
-    if (check == 0)
+    else
         std::cout << "unrecognized kind: " << kind << std::endl;
 }
 int virnum :: show() const
