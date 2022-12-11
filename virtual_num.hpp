@@ -67,33 +67,41 @@ virnum :: virnum(long double real , long double virtuaI)
 virnum :: virnum(char kind , long double num , char mult_1 , long double freq=1 , char mult_2='k')
 {
     long double w;  //w=2*pi*f
+    int check = 0;
     if ('k' == mult_1) num *= 1000;
     else if ('1' == mult_1) num *= 1;
     else if('m' == mult_1) num *= 1e-3;
     else if('u' == mult_1) num *= 1e-6;
     else if('n' == mult_1) num *= 1e-9;
     else if('p' == mult_1) num *= 1e-12;
+    else std::cout << "unrecognized unit: " << mult_1 << std::endl;
     this->num = num;
     if ('k' == mult_2 || 'K' == mult_2) freq *= 1000;
     else if('1' == mult_2) freq *= 1;
     else if('M' == mult_2) freq *= 1e+6;
+    else std::cout << "unrecognized unit: " << mult_2 << std::endl;
     w = 2*pi*freq;
     
     if ('r' == kind || 'R' == kind)
     {
         real = num;
         virtuaI = 0;
+        check = 1;
     }
     else if ('c' == kind || 'C' == kind)
     {
         real = 0;
         virtuaI = -1/(w*num);
+        check = 1;
     }
     else if ('l' == kind || 'L' == kind)
     {
         real = 0;
         virtuaI = w*num;
+        check = 1;
     }
+    if (check == 0)
+        std::cout << "unrecognized kind: " << kind << std::endl;
 }
 int virnum :: show() const
 {
@@ -185,6 +193,7 @@ int virnum::changeFreq(long double freq, char mult='k')
     if ('1' == mult) freq = freq * 1;
     else if ('k' == mult || 'K' == mult) freq = freq * 1000;
     else if ('M' == mult) freq = freq * 1e+6;
+    else std::cout << "unrecognized unit: " << mult << std::endl;
     w = 2*pi*freq;
     if (virtuaI < 0) virtuaI = -1/(w*num);
     else if (virtuaI > 0) virtuaI = w*num;
