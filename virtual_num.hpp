@@ -74,22 +74,22 @@ virnum :: virnum(char kind , long double num , char mult_1 , long double freq=1 
     else if('n' == mult_1) num *= 1e-9;
     else if('p' == mult_1) num *= 1e-12;
     this->num = num;
-    if ('k' == mult_2) freq *= 1000;
+    if ('k' == mult_2 || 'K' == mult_2) freq *= 1000;
     else if('1' == mult_2) freq *= 1;
     else if('M' == mult_2) freq *= 1e+6;
     w = 2*pi*freq;
     
-    if ('r' == kind)
+    if ('r' == kind || 'R' == kind)
     {
         real = num;
         virtuaI = 0;
     }
-    else if ('c' == kind)
+    else if ('c' == kind || 'C' == kind)
     {
         real = 0;
         virtuaI = -1/(w*num);
     }
-    else if ('l' == kind)
+    else if ('l' == kind || 'L' == kind)
     {
         real = 0;
         virtuaI = w*num;
@@ -177,8 +177,13 @@ std::ostream &operator<<(std::ostream &os, const virnum &temp)
 int virnum::changeFreq(long double freq, char mult='k')
 {
     long double w;
+    if (-1 == num)
+    {
+        std::cout << "Warning! ChangeFreq to a num" << std::endl;
+        return 1;
+    }
     if ('1' == mult) freq = freq * 1;
-    else if ('k' == mult) freq = freq * 1000;
+    else if ('k' == mult || 'K' == mult) freq = freq * 1000;
     else if ('M' == mult) freq = freq * 1e+6;
     w = 2*pi*freq;
     if (virtuaI < 0) virtuaI = -1/(w*num);
