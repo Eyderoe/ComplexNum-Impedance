@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
-const long double rad_per_degree = 57.2957795;
-const long double pi = 3.1415926;
+const long double rad_per_degree = 57.29577951308232;
+const long double pi = 3.14159265358979;
 
 /*
 example 1:
@@ -76,6 +76,7 @@ virnum :: virnum(char kind , long double num , char mult_1 , long double freq=1 
     this->num = num;
     if ('k' == mult_2) freq *= 1000;
     else if('1' == mult_2) freq *= 1;
+    else if('M' == mult_2) freq *= 1e+6;
     w = 2*pi*freq;
     
     if ('r' == kind)
@@ -132,7 +133,7 @@ virnum virnum :: operator * (const virnum & temp) const
 }
 virnum virnum :: operator / (const virnum & temp) const
 {
-    virnum up = (*this) * temp.conjugate();
+    virnum up = *this * temp.conjugate();
     long double down = temp.real*temp.real + temp.virtuaI * temp.virtuaI;
     up.real = up.real / down;
     up.virtuaI = up.virtuaI / down;
@@ -178,6 +179,7 @@ int virnum::changeFreq(long double freq, char mult='k')
     long double w;
     if ('1' == mult) freq = freq * 1;
     else if ('k' == mult) freq = freq * 1000;
+    else if ('M' == mult) freq = freq * 1e+6;
     w = 2*pi*freq;
     if (virtuaI < 0) virtuaI = -1/(w*num);
     else if (virtuaI > 0) virtuaI = w*num;
