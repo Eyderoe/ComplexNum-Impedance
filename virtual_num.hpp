@@ -162,7 +162,6 @@ virnum virnum::operator*=(const virnum& temp)
     (*this) = copy_this * temp;
     return *this;
 }
-
 virnum virnum::operator/=(const virnum & temp)
 {
     virnum copy_this (real, virtuaI);
