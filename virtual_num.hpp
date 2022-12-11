@@ -37,7 +37,7 @@ class virnum
     public:
         virnum();
         virnum(long double, long double);
-        virnum(char, long double, char, long double, char); 
+        virnum(char, long double, char, long double, char);
         virnum conjugate () const;
         int changeFreq (long double, char);
         virnum operator + (const virnum &) const;
@@ -159,7 +159,7 @@ virnum virnum::operator-=(const virnum & temp)
 virnum virnum::operator*=(const virnum& temp)
 {
     virnum copy_this (real, virtuaI);
-    (*this) = copy_this * temp;
+    *this = copy_this * temp;
     return *this;
 }
 virnum virnum::operator/=(const virnum & temp)
