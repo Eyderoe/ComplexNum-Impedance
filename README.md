@@ -10,4 +10,10 @@ a class for calculate complex num and impedance in circuit
 >``a - b`` , ``a -= b``\
 >``a * b`` , ``a *= b``\
 >``a / b`` , ``a /= b``\
->``a || b`` _means a parallel with b_
+>``a || b`` _means a parallel with b_\
+>``std::cout << a << b``
+## **other operation**
+``virnum a(1,2)``
+>``a.conjugate()`` _will return 1-2i_\
+>``a.changeFreq(10,'k')`` _change frequency to 10KHz_\
+>_``changeFreq()`` only available on capacitor and inductor_
