@@ -2,7 +2,8 @@
 a class for calculate complex num and impedance in circuit  
 ## **support two kinds declare ways**  
 >``virnum(2,-7)`` _means 2-7i_\
-``virnum('c',20,'p',10,'k')`` _means 20pF capacitor in 10K(Hz) circuit_
+>``virnum('c',20,'p',10,'k')`` _means 20pF capacitor in 10K(Hz) circuit_\
+>``virnum('r',5.1,'1')`` _means 5.1ohm resistor_\
 ## **support basic operation**
 ``virnum a(1,2)``\
 ``virnum b(2,3)``
