@@ -4,17 +4,15 @@ const long double rad_per_degree = 57.2957795;
 const long double pi = 3.1415926;
 
 /*
-a = virnum();   // input: x+y
-a = virnum(x, y);   // x+yi
-a = virnum('c',1.5,'p',10,'k')  // impedance of 1.5pF in 10K circuits
-a.changeFreq(10,'k')  // change frequency to 10k
-a.conjugate () // do not make change, return x-yi
-cout << a
-+, +=, -, -=, *, *=, \, \=, ||
+example 1:
+virnum a (2,1);
+virnum b (3,4);
+virnum c = (a*b)/(b-virnum(4,-1));
+std::cout << c;
 
 example 2:
 int i;
-int list[] = {12,18,28,35,100};
+int list[] = {12,18,28,35};
 virnum a ('c',0.022,'u');
 virnum b ('l',2.2,'m',12,'k');
 virnum c ('r',1,'k');
@@ -34,7 +32,7 @@ class virnum
     private:
         long double real{};
         long double virtuaI{};
-        long double num;  // only available in circuit
+        long double num{};  // only available in circuit
         int show() const;
     public:
         virnum();   //input: x+y
@@ -56,7 +54,7 @@ virnum :: virnum()
 {
     std:: cout << "num: ";
     std:: cin >> real;
-    getchar();
+    std::cin.get();
     std:: cin >> virtuaI;
     num = -1;
 }
