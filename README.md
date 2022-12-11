@@ -13,7 +13,8 @@ a class for calculate complex num and impedance in circuit
 >``a || b`` _means a parallel with b_\
 >``std::cout << a << b``
 ## **other functions**
-``virnum a(1,2)``
+``virnum a(1,2)``\
+``virnum b('l',20,'u',10,'k')``
 >``a.conjugate()`` _will return 1-2i_\
->``a.changeFreq(10,'k')`` _change frequency to 10KHz_\
->_``changeFreq()`` only available on capacitor and inductor_
+>``b.changeFreq(12,'k')`` _change frequency to 10KHz_\
+>``changeFreq()`` _only available on capacitor and inductor_
