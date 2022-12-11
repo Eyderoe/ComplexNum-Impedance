@@ -13,9 +13,9 @@ std::cout << c;
 example 2:
 int i;
 int list[] = {12,18,28,35};
-virnum a ('c',0.022,'u');
-virnum b ('l',2.2,'m',12,'k');
-virnum c ('r',1,'k');
+virnum a ('c',0.022,'u');   // impedance of 0.022uF in 1k(Hz) circuit
+virnum b ('l',2.2,'m',12,'k');  // impedance of 2.2mH in 12k(Hz) circuit
+virnum c ('r',1,'k');   //1k resistor
 virnum d ('r',5.1,'1');
 for (i = 0; i < sizeof(list)/sizeof(int); i++)
 {
@@ -35,9 +35,9 @@ class virnum
         long double num{};  // only available in circuit
         int show() const;
     public:
-        virnum();   //input: x+y
-        virnum(long double, long double);   // (x,y)
-        virnum(char, long double, char, long double, char);  //('c',1.5,'p',10,'k') impedance of 1.5pF in 10K circuit
+        virnum();
+        virnum(long double, long double);
+        virnum(char, long double, char, long double, char); 
         virnum conjugate () const;
         int changeFreq (long double, char);
         virnum operator + (const virnum &) const;
