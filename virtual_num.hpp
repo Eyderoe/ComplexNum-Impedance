@@ -3,29 +3,6 @@
 const long double rad_per_degree = 57.29577951308232;
 const long double pi = 3.14159265358979;
 
-/*
-example 1:
-virnum a (2,1);
-virnum b (3,4);
-virnum c = (a*b)/(b-virnum(4,-1));
-std::cout << c;
-
-example 2:
-int i;
-int list[] = {12,18,28,35};
-virnum a ('c',0.022,'u');   // impedance of 0.022uF in 1k(Hz) circuit
-virnum b ('l',2.2,'m',12,'k');  // impedance of 2.2mH in 12k(Hz) circuit
-virnum c ('r',1,'k');   //1k resistor
-virnum d ('r',5.1,'1');
-for (i = 0; i < sizeof(list)/sizeof(int); i++)
-{
-    a.changeFreq(list[i]);
-    b.changeFreq(list[i],'k');
-    virnum all = (a||c)+b+d;
-    std::cout << all;
-}
- */
-
 class virnum
 {
         friend std::ostream & operator << (std::ostream & os, const virnum & temp);
@@ -40,6 +17,7 @@ class virnum
         virnum(char, long double, char, long double, char);
         virnum conjugate () const;
         int changeFreq (long double, char);
+        long double getLength();
         virnum operator + (const virnum &) const;
         virnum operator += (const virnum &);
         virnum operator - (const virnum &) const;
@@ -194,4 +172,11 @@ int virnum::changeFreq(long double freq, char mult='k')
     if (virtuaI < 0) virtuaI = -1/(w*num);
     else if (virtuaI > 0) virtuaI = w*num;
     return 0;
+}
+long double virnum::getLength()
+{
+    long double length;
+    length = real*real + virtuaI * virtuaI;
+    length = std::pow(length,0.5);
+    return length;
 }
