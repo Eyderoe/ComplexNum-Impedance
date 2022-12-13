@@ -30,10 +30,13 @@ class virnum
 };
 virnum :: virnum()
 {
+    char a;
     std:: cout << "num: ";
     std:: cin >> real;
-    std::cin.get();
+    std::cin.get(a);
     std:: cin >> virtuaI;
+    if (a == '+') virtuaI = +virtuaI;
+    if (a == '-') virtuaI = -virtuaI;
     num = -1;
 }
 virnum :: virnum(long double real , long double virtuaI)
