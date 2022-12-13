@@ -7,11 +7,9 @@ a class for calculate complex num and impedance in circuit
 ## **support basic operation**
 ``virnum a(1,2)``\
 ``virnum b(2,3)``
->``a + b`` , ``a += b``\
->``a - b`` , ``a -= b``\
->``a * b`` , ``a *= b``\
->``a / b`` , ``a /= b``\
->``a || b`` _means a parallel with b_\
+>``a + b`` , ``a += b`` , ``a * b`` , ``a *= b``\
+>``a - b`` , ``a -= b`` , ``a / b`` , ``a /= b``\
+>``a || b`` _means a parallel with b (in circuit)_\
 >``std::cout << a << b``
 ## **other functions**
 ``virnum a(1,2)``\
