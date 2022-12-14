@@ -1,6 +1,6 @@
 # ComplexNum-Impedance
 a class for calculate complex num and impedance in circuit  
-## **support two kinds declare ways**  
+## **two declare ways**  
 >``virnum(2,-7)`` _means 2-7i_\
 >``virnum('c',20,'p',10,'k')`` _means 20pF capacitor in 10K(Hz) circuit_\
 >``virnum('r',5.1,'1')`` _means 5.1ohm resistor_
@@ -9,6 +9,7 @@ a class for calculate complex num and impedance in circuit
 ``virnum b(2,3)``
 >``a + b`` , ``a += b`` , ``a * b`` , ``a *= b``\
 >``a - b`` , ``a -= b`` , ``a / b`` , ``a /= b``\
+>``a ^ (int)`` , ``a ^= (int)``\
 >``a || b`` _means a parallel with b (in circuit)_\
 >``a.Re()`` , ``a.Im()``\
 >``std::cout << a << b``
