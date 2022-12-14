@@ -1,7 +1,8 @@
 #include <iostream>
 #include <cmath>
-const long double rad_per_degree = 57.29577951308232;
-const long double pi = 3.14159265358979;
+const long double vir_radPerDegree = 57.29577951308232;
+const long double vir_pi = 3.14159265358979;
+const long double vir_e = 2.71828182845904;
 
 class virnum
 {
@@ -12,12 +13,21 @@ class virnum
         long double num{};  // only available in circuit
         int show() const;
     public:
+        // declare
         virnum();
         virnum(long double, long double);
         virnum(char, long double, char, long double, char);
+        // function
         virnum conjugate () const;
+        virnum Exp() const;
+        virnum ln() const;
         int changeFreq (long double, char);
-        long double getLength();
+        long double getLength() const;
+        long double getAngle() const;
+        long double getRadAngle() const;
+        long double Re() const;
+        long double Im() const;
+        // overload
         virnum operator + (const virnum &) const;
         virnum operator += (const virnum &);
         virnum operator - (const virnum &) const;
@@ -60,7 +70,7 @@ virnum :: virnum(char kind , long double num , char mult_1 , long double freq=1 
     else if('1' == mult_2) freq *= 1;
     else if('M' == mult_2) freq *= 1e+6;
     else std::cout << "unrecognized unit: " << mult_2 << std::endl;
-    w = 2*pi*freq;
+    w = 2*vir_pi*freq;
     
     if ('r' == kind || 'R' == kind)
     {
@@ -82,13 +92,8 @@ virnum :: virnum(char kind , long double num , char mult_1 , long double freq=1 
 }
 int virnum :: show() const
 {
-    long double length , angle;
-    length = real*real + virtuaI * virtuaI;
-    length = std::pow(length,0.5);
-    angle = std::atan2(virtuaI, real);
-    angle *= rad_per_degree;
-    std:: cout << real << ((virtuaI >= 0) ? " + " : " - ") << ((virtuaI >= 0) ? virtuaI : -virtuaI) << "i" << std:: endl;
-    std::cout << "length: " << length << " angle: " << angle << std::endl;
+    std:: cout << Re() << ((Im() >= 0) ? " + " : " - ") << ((Im() >= 0) ? Im() : -Im()) << "i" << std:: endl;
+    std::cout << "length: " << getLength() << " angle: " << getAngle() << std::endl;
     return 1;
 }
 virnum virnum :: conjugate () const
@@ -171,15 +176,47 @@ int virnum::changeFreq(long double freq, char mult='k')
     else if ('k' == mult || 'K' == mult) freq = freq * 1000;
     else if ('M' == mult) freq = freq * 1e+6;
     else std::cout << "unrecognized unit: " << mult << std::endl;
-    w = 2*pi*freq;
+    w = 2*vir_pi*freq;
     if (virtuaI < 0) virtuaI = -1/(w*num);
     else if (virtuaI > 0) virtuaI = w*num;
     return 0;
 }
-long double virnum::getLength()
+long double virnum::getLength() const
 {
     long double length;
     length = real*real + virtuaI * virtuaI;
-    length = std::pow(length,0.5);
+    length = sqrtl(length);
     return length;
+}
+virnum virnum::Exp() const
+{   // Exp(Z) = e^x (cos(y)+isin(y))
+    long double length;
+    length = powl(vir_e,real);
+    return {length* cosl(virtuaI),length* sinl(virtuaI)};
+}
+long double virnum::Re() const
+{
+    return real;
+}
+long double virnum::Im() const
+{
+    return virtuaI;
+}
+virnum virnum::ln() const
+{   //ln(Z) = ln|Z| + i argZ
+    //Ln(Z) = ln(Z) + i 2kpi
+    return {logl(getLength()),getRadAngle()};
+}
+long double virnum::getAngle() const
+{
+    long double angle;
+    angle = atan2l(virtuaI, real);
+    angle *= vir_radPerDegree;
+    return angle;
+}
+long double virnum::getRadAngle() const
+{
+    long double angle;
+    angle = atan2l(virtuaI, real);
+    return angle;
 }
