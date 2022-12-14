@@ -28,6 +28,8 @@ class virnum
         long double Re() const;
         long double Im() const;
         // overload
+        virnum operator ^ (long long) const;
+        virnum operator ^= (long long);
         virnum operator + (const virnum &) const;
         virnum operator += (const virnum &);
         virnum operator - (const virnum &) const;
@@ -220,3 +222,31 @@ long double virnum::getRadAngle() const
     angle = atan2l(virtuaI, real);
     return angle;
 }
+virnum virnum::operator ^ (long long n) const
+{
+    if (0 == n)
+    {
+        return {1,0};
+    }
+    else if (0 < n)
+    {
+        virnum a = *this;
+        for (long long i = 1; i <= n-1; ++i)
+        {
+            a *= *this;
+        }
+        return a;
+    }
+    else
+    {
+        return virnum(1, 0) / ((*this) ^ (-n));
+    }
+}
+virnum virnum::operator ^= (long long n)
+{
+    virnum cal = *this ^ n;
+    real = cal.Re();
+    virtuaI = cal.Im();
+    return cal;
+}
+
