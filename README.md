@@ -20,6 +20,6 @@ a class for calculate complex num and impedance in circuit
 ``virnum a(1,2)``\
 ``virnum b('l',20,'u',10,'k')``
 >``a.conjugate()`` _will return 1-2i_\
->``a.getLength()`` , ``a.getAngle()``\
+>``a.getLength()`` , ``a.getAngle()`` , ``a.getRadAngle()``\
 >``b.changeFreq(12,'k')`` _change frequency to 12K(Hz)_\
 >``changeFreq()`` _only available on capacitor and inductor_
