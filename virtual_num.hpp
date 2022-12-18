@@ -21,6 +21,7 @@ class virnum
         virnum conjugate () const;
         virnum Exp() const;
         virnum ln() const;
+        virnum quichFactorial(long long n);
         int changeFreq (long double, char);
         long double getLength() const;
         long double getAngle() const;
@@ -248,5 +249,12 @@ virnum virnum::operator ^= (long long n)
     real = cal.Re();
     virtuaI = cal.Im();
     return cal;
+}
+virnum virnum::quichFactorial(long long n)
+{
+    long double length;
+    length = powl(getLength(),n);
+    *this = {length*cosl(n*getRadAngle()),length*sinl(n*getRadAngle())};
+    return *this;
 }
 
