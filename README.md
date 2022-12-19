@@ -25,3 +25,8 @@ a class for calculate complex num and impedance in circuit
 >``quichFactorial(long long)`` _loss precision_\
 >``b.changeFreq(12,'k')`` _change frequency to 12K(Hz)_\
 >``changeFreq()`` _only available on capacitor and inductor_
+## **gui 芝士答辩**
+``virnum a('l',20,'u',10,'k')``
+>``a.acAnaly_degree()``\
+>``a.acAnaly_db()``\
+>``a.acAnaly_length()``
