@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <graphics.h>
 const long double vir_radPerDegree = 57.29577951308232;
 const long double vir_pi = 3.14159265358979;
 const long double vir_e = 2.71828182845904;
@@ -12,6 +13,7 @@ class virnum
         long double virtuaI{};
         long double num{};  // only available in circuit
         int show() const;
+        long double transMult(long double,char) const;
     public:
         // declare
         virnum();
@@ -61,18 +63,9 @@ virnum :: virnum(long double real , long double virtuaI)
 virnum :: virnum(char kind , long double num , char mult_1 , long double freq=1 , char mult_2='k')
 {
     long double w;  //w=2*pi*f
-    if ('k' == mult_1) num *= 1000;
-    else if ('1' == mult_1) num *= 1;
-    else if('m' == mult_1) num *= 1e-3;
-    else if('u' == mult_1) num *= 1e-6;
-    else if('n' == mult_1) num *= 1e-9;
-    else if('p' == mult_1) num *= 1e-12;
-    else std::cout << "unrecognized unit: " << mult_1 << std::endl;
+    num = transMult(num,mult_1);
     this->num = num;
-    if ('k' == mult_2 || 'K' == mult_2) freq *= 1000;
-    else if('1' == mult_2) freq *= 1;
-    else if('M' == mult_2) freq *= 1e+6;
-    else std::cout << "unrecognized unit: " << mult_2 << std::endl;
+    freq = transMult(freq,mult_2);
     w = 2*vir_pi*freq;
     
     if ('r' == kind || 'R' == kind)
@@ -175,10 +168,7 @@ int virnum::changeFreq(long double freq, char mult='k')
         std::cout << "Warning! ChangeFreq to a num" << std::endl;
         return 1;
     }
-    if ('1' == mult) freq = freq * 1;
-    else if ('k' == mult || 'K' == mult) freq = freq * 1000;
-    else if ('M' == mult) freq = freq * 1e+6;
-    else std::cout << "unrecognized unit: " << mult << std::endl;
+    freq = transMult(freq,mult);
     w = 2*vir_pi*freq;
     if (virtuaI < 0) virtuaI = -1/(w*num);
     else if (virtuaI > 0) virtuaI = w*num;
@@ -257,4 +247,16 @@ virnum virnum::quichFactorial(long long n)
     *this = {length*cosl(n*getRadAngle()),length*sinl(n*getRadAngle())};
     return *this;
 }
-
+long double virnum::transMult(long double numy, char mult) const
+{
+    if ('k' == mult or 'K'==mult) numy *= 1e+3;
+    else if ('M' == mult) numy *= 1e+6;
+    else if ('G' == mult) numy *= 1e+9;
+    else if ('1' == mult) numy *= 1;
+    else if('m' == mult) numy *= 1e-3;
+    else if('u' == mult) numy *= 1e-6;
+    else if('n' == mult) numy *= 1e-9;
+    else if('p' == mult) numy *= 1e-12;
+    else std::cout << "unrecognized unit: " << mult << std::endl;
+    return numy;
+}
