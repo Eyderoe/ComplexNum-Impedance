@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <graphics.h>
+
 const long double vir_radPerDegree = 57.29577951308232;
 const long double vir_pi = 3.14159265358979;
 const long double vir_e = 2.71828182845904;
